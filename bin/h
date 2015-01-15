@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 require 'json'
 
-path = File.expand_path('~/.heroku-apps.json')
+path = File.expand_path(Dir.pwd+'/.heroku-apps.json')
 if File.exists?(path)
   envs = File.open(path, 'r') { |f| JSON.load(f) }
 else
-  puts '~/.heroku-apps.json must be configured for your environments before '\
+  puts '.heroku-apps.json must be configured for your environments before '\
        'using `h`'
   exit -1
 end
@@ -17,11 +17,12 @@ action_args = ARGV
 
 actions = {
   logs:      'logs -t',
-  console:   'run rails c',
+  console:   'run console',
   bash:      'run bash',
   hist:      'releases',
   mon:       'maintenance:on',
   moff:      'maintenance:off',
+
   # Database
   pg:        'pg:psql',
   pginfo:    'pg:info',
